@@ -6,13 +6,12 @@ body {
 	display: grid;
 	height: 700px;
 	width: 80%;
-	grid-template-rows: repeat(auto-fill, minmax(10px, auto));
-	grid-template-columns: repeat(auto-fill, minmax(10px, auto));
+	grid-template-columns: repeat(var(--gridSize), auto);
 	margin: auto;
 }
 
 div {
-	background-color: black;
+	background-color: grey;
 	
 
 }
