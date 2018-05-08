@@ -15,7 +15,7 @@ body {
 
 
 .hovered {
-	background-color: hsl(0, 100%, var(--increment));
+	background-color: hsl(0, 100%, 0%);
 }
 
 #container div {

@@ -1,6 +1,10 @@
 
 const container = document.getElementById("container");
+const resetButton = document.getElementById("reset");
+const rainbowButton = document.getElementById("rainbow");
+
 generateGrid();
+
 function generateGrid (gridSize = 16) {
 	for ( i = 0; i < Math.pow(gridSize, 2); ++i) {
 		let newDiv = document.createElement("div");
@@ -10,16 +14,29 @@ function generateGrid (gridSize = 16) {
 
 }
 let childNodes = container.querySelectorAll("div");
-for (i = 0; i < childNodes.length; ++i) {
-	childNodes[i].addEventListener("mouseenter", function(e) {
-		this.classList.add("hovered")
-	});
+applyEvents();
+
+function applyEvents () {
+	for (i = 0; i < childNodes.length; ++i) {
+	childNodes[i].addEventListener("mouseenter", darkenDiv);
+    }
 }		
 
-function darkenDiv () {
-	//let increment = 0;
-	//increment += 10;
+function darkenDiv (e) {
 	this.classList.add("hovered");
-	//this.style.setProperty("--increment", increment);
+	return;
+}
+
+rainbowButton.addEventListener("click", randomColors);
+resetButton.addEventListener("click", resetGrid);
+
+function resetGrid (e) {
+	let resetSize = prompt("What dimensions woud you like for you sketch pad? eg. 24 gives a 24x24 grid", 16);
+	while(container.firstChild) {
+		container.removeChild(container.firstChild);
+	}
+	generateGrid(resetSize);
+	childNodes = container.querySelectorAll("div");
+	applyEvents();
 	return;
 }
