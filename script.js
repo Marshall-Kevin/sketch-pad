@@ -27,10 +27,10 @@ function darkenDiv (e) {
 	return;
 }
 
-rainbowButton.addEventListener("click", randomColors);
+rainbowButton.addEventListener("click", function() {console.log("clicked")});
 resetButton.addEventListener("click", resetGrid);
 
-function resetGrid (e) {
+function resetGrid () {
 	let resetSize = prompt("What dimensions woud you like for you sketch pad? eg. 24 gives a 24x24 grid", 16);
 	while(container.firstChild) {
 		container.removeChild(container.firstChild);
