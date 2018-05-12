@@ -2,6 +2,7 @@
 const container = document.getElementById("container");
 const resetButton = document.getElementById("reset");
 const rainbowButton = document.getElementById("rainbow");
+let rainbowSet = false;
 
 generateGrid();
 
@@ -18,7 +19,12 @@ applyEvents();
 
 function applyEvents () {
 	for (i = 0; i < childNodes.length; ++i) {
-	childNodes[i].addEventListener("mouseenter", darkenDiv);
+		if (rainbowSet == true) {
+			childNodes[i].addEventListener("mouseenter", makeRandomColors);
+		}
+		else {
+			childNodes[i].addEventListener("mouseenter", darkenDiv);
+		}
     }
 }		
 
@@ -27,15 +33,21 @@ function darkenDiv (e) {
 	return;
 }
 
-rainbowButton.addEventListener("click", function() {console.log("clicked")});
+function makeRandomColors (e) {
+	this.classList.add("rainbowHover");
+	this.style.backgroundColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+}
+
+rainbowButton.addEventListener("click", function() {rainbowSet = true; applyEvents();});
 resetButton.addEventListener("click", resetGrid);
 
 function resetGrid () {
-	let resetSize = prompt("What dimensions woud you like for you sketch pad? eg. 24 gives a 24x24 grid", 16);
+	let resetSize = prompt("What dimensions woud you like for you sketch pad? eg. 16 gives a 16x16 grid", 16);
 	while(container.firstChild) {
 		container.removeChild(container.firstChild);
 	}
 	generateGrid(resetSize);
+	rainbowSet = false;
 	childNodes = container.querySelectorAll("div");
 	applyEvents();
 	return;
